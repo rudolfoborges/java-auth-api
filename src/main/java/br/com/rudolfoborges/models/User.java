@@ -1,9 +1,8 @@
 package br.com.rudolfoborges.models;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -15,18 +14,17 @@ public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull @Max(100)
+    @NotNull @Length(max = 100)
     private String name;
 
-    @NotNull @Max(100)
+    @NotNull @Length(max = 100)
     @Column(unique = true)
     private String email;
 
-    @NotNull @Max(100)
+    @NotNull @Length(max = 100)
     private String password;
 
-    @CreatedDate
-    @NotNull @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
     @NotNull @Temporal(TemporalType.TIMESTAMP)
@@ -34,6 +32,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Phone> phones;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Session> session;
 
     public User(){
         this.modified = new Date();
@@ -91,5 +92,13 @@ public class User {
 
     public void setModified(Date modified) {
         this.modified = modified;
+    }
+
+    public List<Session> getSession() {
+        return session;
+    }
+
+    public void setSession(List<Session> session) {
+        this.session = session;
     }
 }

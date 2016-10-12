@@ -1,5 +1,7 @@
 package br.com.rudolfoborges.models;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
@@ -14,7 +16,7 @@ public class Phone {
     @NotNull
     private Long number;
 
-    @NotNull @Max(2)
+    @NotNull @Length(max = 100)
     private Integer ddd;
 
     @ManyToOne(optional = false)

@@ -1,5 +1,7 @@
 package br.com.rudolfoborges.models;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
@@ -15,7 +17,7 @@ public class Session {
     @NotNull @Temporal(TemporalType.TIMESTAMP)
     private Date lastLogin;
 
-    @NotNull @Max(150)
+    @NotNull @Length(max = 150)
     private String token;
 
     @ManyToOne(optional = false)

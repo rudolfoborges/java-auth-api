@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,10 +29,13 @@ public class SignInController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Map<String, Object>> signIn(@RequestBody @Valid User user){
-        if(userRepository.findCountByEmail(user.getEmail()) > 0){
+        if(userRepository.countByEmail(user.getEmail()) > 0){
             throw new BusinessException("E-mail já existente");
         }
+
+        user.setCreated(new Date());
         userRepository.save(user);
+
         return new ResponseEntity<Map<String, Object>>(new HashMap<String, Object>(), HttpStatus.OK);
     }
 
