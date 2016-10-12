@@ -1,5 +1,6 @@
 package br.com.rudolfoborges.models;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ public class User {
     @NotNull @Length(max = 100)
     private String name;
 
-    @NotNull @Length(max = 100)
+    @NotNull @Length(max = 100) @Email
     @Column(unique = true)
     private String email;
 
@@ -38,6 +39,10 @@ public class User {
 
     public User(){
         this.modified = new Date();
+    }
+
+    public void defineCreatedDate(){
+        this.created = new Date();
     }
 
     public Long getId() {

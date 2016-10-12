@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +32,7 @@ public class SignInController {
             throw new BusinessException("E-mail já existente");
         }
 
-        user.setCreated(new Date());
+        user.defineCreatedDate();
         userRepository.save(user);
 
         return new ResponseEntity<Map<String, Object>>(new HashMap<String, Object>(), HttpStatus.OK);
