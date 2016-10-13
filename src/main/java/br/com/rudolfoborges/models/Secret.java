@@ -20,6 +20,14 @@ public class Secret {
     @NotNull @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
+    public Secret(){}
+
+    public Secret(String value){
+        this.value = value;
+        this.enabled = true;
+        this.created = new Date();
+    }
+
     public Long getId() {
         return id;
     }

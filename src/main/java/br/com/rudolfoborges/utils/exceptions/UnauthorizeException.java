@@ -3,12 +3,12 @@ package br.com.rudolfoborges.utils.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+import br.com.rudolfoborges.utils.MessagesProperties;
+
+@ResponseStatus(value = HttpStatus.FORBIDDEN)
 public class UnauthorizeException extends RuntimeException {
 
-    private static final String ERROR_MESSAGE = "Usuário e/ou senha inválidos";
-
-    public UnauthorizeException(){
-        super(ERROR_MESSAGE);
+    public UnauthorizeException(MessagesProperties messagesProperties){
+        super(messagesProperties.getForbidden());
     }
 }

@@ -7,9 +7,9 @@ import br.com.rudolfoborges.models.User;
 import br.com.rudolfoborges.repositories.SecretRepository;
 import br.com.rudolfoborges.repositories.SessionRepository;
 import br.com.rudolfoborges.repositories.UserRepository;
+import br.com.rudolfoborges.utils.MessagesProperties;
 import br.com.rudolfoborges.utils.encrypt.BCryptStrategy;
-import br.com.rudolfoborges.utils.encrypt.EncryptStrategy;
-import br.com.rudolfoborges.utils.exceptions.UnauthorizeException;
+import br.com.rudolfoborges.utils.exceptions.EmailOrPasswordInvalidException;
 import br.com.rudolfoborges.utils.serializers.ResponseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,12 +29,17 @@ public class LoginControlle {
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
     private final SecretRepository secretRepository;
+	private final MessagesProperties messagesProperties;
 
     @Autowired
-    public LoginControlle(UserRepository userRepository,SessionRepository sessionRepository, SecretRepository secretRepository){
+    public LoginControlle(UserRepository userRepository, 
+    		SessionRepository sessionRepository, 
+    		SecretRepository secretRepository,
+    		MessagesProperties messagesProperties){
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
         this.secretRepository = secretRepository;
+		this.messagesProperties = messagesProperties;
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -42,12 +47,13 @@ public class LoginControlle {
         User user = userRepository.findOneByEmail(login.getEmail());
 
         if(!login.verify(new BCryptStrategy(), user)){
-            throw new UnauthorizeException();
+            throw new EmailOrPasswordInvalidException(messagesProperties);
         }
 
         Secret secret = secretRepository.findFirstByEnabled(true);
 
         Session session = new Session(user);
+        session.createJWTToken(secret.getValue());
         sessionRepository.save(session);
 
         return ResponseBuilder.login(user, session);

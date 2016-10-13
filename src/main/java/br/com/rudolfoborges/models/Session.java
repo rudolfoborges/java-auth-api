@@ -1,11 +1,23 @@
 package br.com.rudolfoborges.models;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
+import com.auth0.jwt.JWTSigner;
 
 @Entity
 @Table(name = "sessions")
@@ -29,6 +41,14 @@ public class Session {
     public Session(User user){
         this.user = user;
         this.lastLogin = new Date();
+    }
+    
+    public void createJWTToken(String secret){
+    	JWTSigner jwtSigner = new JWTSigner(secret);
+    	Map<String, Object> claims = new HashMap<String, Object>();
+    	claims.put("user", user);
+    	claims.put("session", this);
+    	token = jwtSigner.sign(claims);
     }
 
     public Long getId() {

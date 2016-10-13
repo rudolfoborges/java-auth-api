@@ -1,6 +1,7 @@
 package br.com.rudolfoborges.models;
 
 import br.com.rudolfoborges.utils.encrypt.EncryptStrategy;
+import br.com.rudolfoborges.utils.encrypt.Salt;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
@@ -26,6 +27,9 @@ public class User {
     @NotNull @Length(max = 100)
     private String password;
 
+    @NotNull @Length(max = 20)
+    private String salt;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
@@ -47,7 +51,8 @@ public class User {
     }
 
     public void encodePassword(EncryptStrategy encryptStrategy){
-        password = encryptStrategy.encode(password);
+        salt = Salt.get();
+        password = encryptStrategy.encode(password, salt);
     }
 
     public Boolean verifyPassword(String chekedPassword){
@@ -84,6 +89,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public List<Phone> getPhones() {

@@ -1,7 +1,10 @@
 package br.com.rudolfoborges.controllers;
 
+import br.com.rudolfoborges.utils.MessagesProperties;
 import br.com.rudolfoborges.utils.exceptions.BusinessException;
 import br.com.rudolfoborges.utils.exceptions.UnauthorizeException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,7 +17,10 @@ import java.util.*;
 
 @RestControllerAdvice
 public class ExceptionHandlerControllerAdvice {
-
+	
+	@Autowired
+	private MessagesProperties messagesProperties;
+	
     @ExceptionHandler(value = {BusinessException.class, UnauthorizeException.class})
     @ResponseBody
     public Map<String, Object> handleInternalExceptions(BusinessException e) {
@@ -38,7 +44,7 @@ public class ExceptionHandlerControllerAdvice {
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public Map<String, Object> handleAllExceptions(){
-        return buildResponseMap(Arrays.asList("Ocorreu um erro inesperado. Favor tente mais tarde."));
+        return buildResponseMap(Arrays.asList(messagesProperties.getInternalError()));
     }
 
     private Map<String, Object> buildResponseMap(List<String> messages){
