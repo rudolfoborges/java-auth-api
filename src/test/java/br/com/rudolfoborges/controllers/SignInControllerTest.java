@@ -1,12 +1,12 @@
 package br.com.rudolfoborges.controllers;
 
 import br.com.rudolfoborges.models.User;
+import br.com.rudolfoborges.repositories.SessionRepository;
 import br.com.rudolfoborges.repositories.UserRepository;
-import br.com.rudolfoborges.utils.BusinessException;
+import br.com.rudolfoborges.utils.exceptions.BusinessException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.internal.matchers.Any;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.*;
@@ -15,13 +15,15 @@ import static org.mockito.Mockito.*;
 public class SignInControllerTest {
 
     private UserRepository userRepository;
+    private SessionRepository sessionRepository;
     private SignInController signInController;
     private User user;
 
     @Before
     public void before(){
         userRepository = mock(UserRepository.class);
-        signInController = new SignInController(userRepository);
+        sessionRepository = mock(SessionRepository.class);
+        signInController = new SignInController(userRepository, sessionRepository);
         user = mock(User.class);
     }
 

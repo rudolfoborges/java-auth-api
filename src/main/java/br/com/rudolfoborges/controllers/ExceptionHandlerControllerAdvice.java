@@ -1,6 +1,7 @@
 package br.com.rudolfoborges.controllers;
 
-import br.com.rudolfoborges.utils.BusinessException;
+import br.com.rudolfoborges.utils.exceptions.BusinessException;
+import br.com.rudolfoborges.utils.exceptions.UnauthorizeException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,14 +15,13 @@ import java.util.*;
 @RestControllerAdvice
 public class ExceptionHandlerControllerAdvice {
 
-    @ExceptionHandler(value = { BusinessException.class })
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = {BusinessException.class, UnauthorizeException.class})
     @ResponseBody
-    public Map<String, Object> handleBusinessViolations(BusinessException e) {
+    public Map<String, Object> handleInternalExceptions(BusinessException e) {
         return buildResponseMap(Arrays.asList(e.getMessage()));
     }
 
-    @ExceptionHandler(value = { MethodArgumentNotValidException.class })
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public Map<String, Object> handleConstraintViolations(MethodArgumentNotValidException e){
@@ -32,6 +32,13 @@ public class ExceptionHandlerControllerAdvice {
             messages.add(String.format("%s - %s", field, message));
         });
         return buildResponseMap(messages);
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public Map<String, Object> handleAllExceptions(){
+        return buildResponseMap(Arrays.asList("Ocorreu um erro inesperado. Favor tente mais tarde."));
     }
 
     private Map<String, Object> buildResponseMap(List<String> messages){

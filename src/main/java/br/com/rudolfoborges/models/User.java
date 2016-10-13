@@ -1,5 +1,6 @@
 package br.com.rudolfoborges.models;
 
+import br.com.rudolfoborges.utils.encrypt.EncryptStrategy;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
@@ -31,7 +32,7 @@ public class User {
     @NotNull @Temporal(TemporalType.TIMESTAMP)
     private Date modified;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     private List<Phone> phones;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
@@ -43,6 +44,14 @@ public class User {
 
     public void defineCreatedDate(){
         this.created = new Date();
+    }
+
+    public void encodePassword(EncryptStrategy encryptStrategy){
+        password = encryptStrategy.encode(password);
+    }
+
+    public Boolean verifyPassword(String chekedPassword){
+        return password.equals(chekedPassword);
     }
 
     public Long getId() {

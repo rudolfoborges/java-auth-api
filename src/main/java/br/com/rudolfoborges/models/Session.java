@@ -24,6 +24,13 @@ public class Session {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Session(){}
+
+    public Session(User user){
+        this.user = user;
+        this.lastLogin = new Date();
+    }
+
     public Long getId() {
         return id;
     }
