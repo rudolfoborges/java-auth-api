@@ -27,7 +27,7 @@ public class User {
     @NotNull @Length(max = 100)
     private String password;
 
-    @NotNull @Length(max = 20)
+    @Length(max = 50)
     private String salt;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,7 +36,7 @@ public class User {
     @NotNull @Temporal(TemporalType.TIMESTAMP)
     private Date modified;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Phone> phones;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

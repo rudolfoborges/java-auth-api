@@ -26,7 +26,6 @@ public class SignInControllerTest {
     private MessagesProperties messagesProperties;
 
     private SignInController signInController;
-    private User user;
 
     @Before
     public void before(){
@@ -35,21 +34,21 @@ public class SignInControllerTest {
         secretRepository = mock(SecretRepository.class);
         messagesProperties = mock(MessagesProperties.class);
         
-        Secret secret = mock(Secret.class);
-        when(secret.getValue()).thenReturn("secret");
+        Secret secret = new Secret("secret");
         when(secretRepository.findFirstByEnabled(true)).thenReturn(secret);
 
         signInController = new SignInController(userRepository, sessionRepository, secretRepository, messagesProperties);
-        user = mock(User.class);
     }
 
     @Test
     public void signinTest(){
+    	User user = new User();
         signInController.signIn(user);
     }
 
     @Test(expected = BusinessException.class)
     public void signinUniqueEmailTest(){
+    	User user = new User();
         when(userRepository.countByEmail(anyString())).thenReturn(1L);
         signInController.signIn(user);
     }

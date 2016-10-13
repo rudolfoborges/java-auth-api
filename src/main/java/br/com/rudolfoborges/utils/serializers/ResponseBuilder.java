@@ -13,8 +13,8 @@ public class ResponseBuilder {
         model.put("id", user.getId());
         model.put("created", user.getCreated());
         model.put("modified", user.getModified());
-        model.put("last_login", null);
-        model.put("token", null);
+        model.put("last_login", session.getLastLogin());
+        model.put("token", session.getToken());
         return model;
     }
 

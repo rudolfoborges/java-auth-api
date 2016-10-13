@@ -1,10 +1,8 @@
 package br.com.rudolfoborges.models;
 
-import br.com.rudolfoborges.utils.encrypt.BCrypt;
-import br.com.rudolfoborges.utils.encrypt.EncryptStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.NotNull;
+import br.com.rudolfoborges.utils.encrypt.EncryptStrategy;
 
 public class Login {
 
@@ -14,8 +12,12 @@ public class Login {
     private String password;
 
     public Boolean verify(EncryptStrategy encryptStrategy, User user){
+    	if(user == null){
+    		return false;
+    	}
+    	
         String encodePassword = encryptStrategy.encode(password, user.getSalt());
-        return (user != null && user.verifyPassword(encodePassword));
+        return user.verifyPassword(encodePassword);
     }
 
     public String getEmail() {

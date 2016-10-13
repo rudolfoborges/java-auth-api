@@ -23,7 +23,7 @@ import java.util.Map;
 
 @RestController
 @Transactional
-@RequestMapping("api/v1/auth")
+@RequestMapping("api/v1/login")
 public class LoginControlle {
 
     private final UserRepository userRepository;

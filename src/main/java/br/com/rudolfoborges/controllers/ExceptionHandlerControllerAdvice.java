@@ -1,30 +1,40 @@
 package br.com.rudolfoborges.controllers;
 
-import br.com.rudolfoborges.utils.MessagesProperties;
-import br.com.rudolfoborges.utils.exceptions.BusinessException;
-import br.com.rudolfoborges.utils.exceptions.UnauthorizeException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.*;
+import br.com.rudolfoborges.utils.MessagesProperties;
+import br.com.rudolfoborges.utils.exceptions.ApplicationException;
 
 @RestControllerAdvice
 public class ExceptionHandlerControllerAdvice {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandlerControllerAdvice.class);
+	
 	@Autowired
 	private MessagesProperties messagesProperties;
 	
-    @ExceptionHandler(value = {BusinessException.class, UnauthorizeException.class})
+    @ExceptionHandler(value = {ApplicationException.class})
     @ResponseBody
-    public Map<String, Object> handleInternalExceptions(BusinessException e) {
-        return buildResponseMap(Arrays.asList(e.getMessage()));
+    public ResponseEntity<Map<String, Object>> handleInternalExceptions(ApplicationException e) {
+    	LOGGER.error(e.getMessage(), e);
+    	Map<String, Object> body = buildResponseMap(Arrays.asList(e.getMessage()));
+        return new ResponseEntity<Map<String, Object>>(body, e.getHttpStatus());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -37,13 +47,15 @@ public class ExceptionHandlerControllerAdvice {
             String message = error.getDefaultMessage();
             messages.add(String.format("%s - %s", field, message));
         });
+        LOGGER.error(e.getMessage(), e);
         return buildResponseMap(messages);
     }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public Map<String, Object> handleAllExceptions(){
+    public Map<String, Object> handleAllExceptions(Exception e){
+    	LOGGER.error(e.getMessage(), e);
         return buildResponseMap(Arrays.asList(messagesProperties.getInternalError()));
     }
 

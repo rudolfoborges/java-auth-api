@@ -1,13 +1,11 @@
 package br.com.rudolfoborges.utils;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
 @PropertySource("messages.properties")
-@ConfigurationProperties(prefix = "messages")
 public class MessagesProperties {
 	
 	@Value("${messages.unauthorize}")

@@ -31,6 +31,7 @@ public class SignInController {
     private final SessionRepository sessionRepository;
     private final SecretRepository secretRepository;
 	private final MessagesProperties messagesProperties;
+	
 
     @Autowired
     public SignInController(UserRepository userRepository, 

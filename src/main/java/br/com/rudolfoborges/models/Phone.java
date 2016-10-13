@@ -1,9 +1,12 @@
 package br.com.rudolfoborges.models;
 
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.*;
-import javax.validation.constraints.Max;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -16,10 +19,10 @@ public class Phone {
     @NotNull
     private Long number;
 
-    @NotNull @Length(max = 100)
+    @NotNull
     private Integer ddd;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

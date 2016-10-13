@@ -18,7 +18,7 @@ public class JavaAuthApiApplication implements CommandLineRunner {
 	}
 
 	public void run(String... args) throws Exception {
-		Secret secret = new Secret("");
+		Secret secret = new Secret("ff298e4c4f975caa25114d524167027dd47275f4bf7e414fce87b993ad12d058");
 		secretRepository.save(secret);
 	}
 }

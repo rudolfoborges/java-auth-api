@@ -29,10 +29,10 @@ public class Session {
     @NotNull @Temporal(TemporalType.TIMESTAMP)
     private Date lastLogin;
 
-    @NotNull @Length(max = 150)
+    @NotNull @Length(max = 500)
     private String token;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -46,8 +46,9 @@ public class Session {
     public void createJWTToken(String secret){
     	JWTSigner jwtSigner = new JWTSigner(secret);
     	Map<String, Object> claims = new HashMap<String, Object>();
-    	claims.put("user", user);
-    	claims.put("session", this);
+    	claims.put("id", user.getId());
+    	claims.put("email", user.getEmail());
+    	claims.put("last_login", this.getLastLogin());
     	token = jwtSigner.sign(claims);
     }
 
