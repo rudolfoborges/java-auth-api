@@ -20,6 +20,9 @@ public class MessagesProperties {
 	@Value("${messages.internalError}")
 	private String internalError;
 
+	@Value("${messages.invalidSession}")
+	private String invalidSession;
+
 	public String getUnauthorize() {
 		return unauthorize;
 	}
@@ -51,5 +54,12 @@ public class MessagesProperties {
 	public void setInternalError(String internalError) {
 		this.internalError = internalError;
 	}
-	
+
+	public String getInvalidSession() {
+		return invalidSession;
+	}
+
+	public void setInvalidSession(String invalidSession) {
+		this.invalidSession = invalidSession;
+	}
 }

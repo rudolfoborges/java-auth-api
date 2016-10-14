@@ -9,9 +9,8 @@ import br.com.rudolfoborges.repositories.SessionRepository;
 import br.com.rudolfoborges.repositories.UserRepository;
 import br.com.rudolfoborges.utils.encrypt.BCryptStrategy;
 import br.com.rudolfoborges.utils.exceptions.EmailOrPasswordInvalidException;
+import br.com.rudolfoborges.utils.exceptions.InvalidSessionException;
 import br.com.rudolfoborges.utils.exceptions.UnauthorizeException;
-import br.com.rudolfoborges.utils.jwt.Claims;
-import br.com.rudolfoborges.utils.jwt.ClaimsBuilder;
 import br.com.rudolfoborges.utils.jwt.JWTBuilder;
 import br.com.rudolfoborges.utils.serializers.SuccessResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
-import java.util.Map;
 
 @RestController
 @Transactional
@@ -69,8 +67,12 @@ public class AuthControlle {
 
         Session session = sessionRepository.findOneByToken(token);
 
-        if(session != null && !session.verify(user, token)){
+        if(session == null || !session.verify(user, token)){
             throw new UnauthorizeException();
+        }
+
+        if(!session.isValid()){
+            throw new InvalidSessionException();
         }
 
         return new SuccessResponse(user, session);

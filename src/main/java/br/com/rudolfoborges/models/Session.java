@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +14,8 @@ import java.util.Map;
 @Entity
 @Table(name = "sessions")
 public class Session {
+
+    private static final long SESSION_TIME = 30 * 60;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,6 +36,17 @@ public class Session {
         this.user = user;
         this.lastLogin = loginDate;
         this.token = token;
+    }
+
+    public boolean verify(User user, String token) {
+        return this.token.equals(token) && this.user.getId().equals(user.getId());
+    }
+
+    public boolean isValid(){
+        Instant now = Instant.now();
+        Instant lastLoginInstant = Instant.ofEpochMilli(lastLogin.getTime());
+        Duration duration = Duration.between(lastLoginInstant, now);
+        return duration.getSeconds() <= SESSION_TIME;
     }
 
     public Long getId() {
@@ -64,9 +79,5 @@ public class Session {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public boolean verify(User user, String token) {
-        return this.token.equals(token) && this.user.getId().equals(user.getId());
     }
 }

@@ -1,10 +1,7 @@
 package br.com.rudolfoborges.controllers;
 
 import br.com.rudolfoborges.utils.MessagesProperties;
-import br.com.rudolfoborges.utils.exceptions.ApplicationException;
-import br.com.rudolfoborges.utils.exceptions.BusinessException;
-import br.com.rudolfoborges.utils.exceptions.EmailOrPasswordInvalidException;
-import br.com.rudolfoborges.utils.exceptions.UnauthorizeException;
+import br.com.rudolfoborges.utils.exceptions.*;
 import br.com.rudolfoborges.utils.serializers.MessagesResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +38,8 @@ public class ExceptionsControllerAdvice {
             body = new MessagesResponse(Arrays.asList(messagesProperties.getUnauthorize()));
         } else if(e instanceof UnauthorizeException) {
             body = new MessagesResponse(Arrays.asList(messagesProperties.getForbidden()));
+        } else if(e instanceof InvalidSessionException) {
+            body = new MessagesResponse(Arrays.asList(messagesProperties.getInvalidSession()));
         }
 
         return new ResponseEntity<MessagesResponse>(body, e.getHttpStatus());

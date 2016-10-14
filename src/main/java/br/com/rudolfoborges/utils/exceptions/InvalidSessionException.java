@@ -2,9 +2,9 @@ package br.com.rudolfoborges.utils.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-public class SessionInvalidException  extends ApplicationException {
+public class InvalidSessionException extends ApplicationException {
 
-    public SessionInvalidException(HttpStatus httpStatus) {
+    public InvalidSessionException() {
         super(HttpStatus.valueOf(419));
     }
 }
