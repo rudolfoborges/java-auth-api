@@ -10,9 +10,10 @@ Projeto Java parte do processo seletivo da Concrete Solutions
 * Mockito
 
 ### Endpoints
+
 * http://localhost:8080/api/v1/signin - POST
 * http://localhost:8080/api/v1/auth/login - POST
-* http://localhost:8080/api/v1/auth/perfil - GET
+* http://localhost:8080/api/v1/auth/perfil/{id} - GET
 
 ### Run with Docker (Commands)
 
@@ -22,5 +23,8 @@ docker-compose build
 
 docker-compose up -d
 
-### Demo
-http://...
+### Demo (Heroku)
+
+* http://sheltered-mesa-83429.herokuapp.com/api/v1/signin - POST
+* http://sheltered-mesa-83429.herokuapp.com/api/v1/auth/login - POST
+* http://sheltered-mesa-83429.herokuapp.com/api/v1/auth/perfil/{id} - GET
