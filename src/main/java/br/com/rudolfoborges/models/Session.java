@@ -65,4 +65,8 @@ public class Session {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public boolean verify(User user, String token) {
+        return this.token.equals(token) && this.user.getId().equals(user.getId());
+    }
 }

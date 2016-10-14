@@ -1,5 +1,8 @@
 package br.com.rudolfoborges.utils.jwt;
 
+import br.com.rudolfoborges.utils.exceptions.UnauthorizeException;
+import com.auth0.jwt.JWTVerifier;
+
 import java.util.Map;
 
 public class ClaimsBuilder {
@@ -10,7 +13,12 @@ public class ClaimsBuilder {
         this.secret = secret;
     }
 
-    public Map<String, Object> build(String token){
-        return null;
+    public Claims build(String token){
+        try {
+            JWTVerifier jwtVerifier = new JWTVerifier(secret);
+            return new Claims(jwtVerifier.verify(token));
+        } catch (Exception e){
+            throw new UnauthorizeException();
+        }
     }
 }

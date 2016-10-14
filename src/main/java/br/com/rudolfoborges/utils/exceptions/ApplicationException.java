@@ -11,6 +11,10 @@ public abstract class ApplicationException extends RuntimeException {
 		this.httpStatus = httpStatus;;
 	}
 
+	public ApplicationException(HttpStatus httpStatus){
+		this.httpStatus = httpStatus;;
+	}
+
 	public HttpStatus getHttpStatus() {
 		return httpStatus;
 	}

@@ -7,20 +7,20 @@ import br.com.rudolfoborges.models.User;
 import br.com.rudolfoborges.repositories.SecretRepository;
 import br.com.rudolfoborges.repositories.SessionRepository;
 import br.com.rudolfoborges.repositories.UserRepository;
-import br.com.rudolfoborges.utils.MessagesProperties;
 import br.com.rudolfoborges.utils.encrypt.BCryptStrategy;
 import br.com.rudolfoborges.utils.exceptions.EmailOrPasswordInvalidException;
+import br.com.rudolfoborges.utils.exceptions.UnauthorizeException;
+import br.com.rudolfoborges.utils.jwt.Claims;
+import br.com.rudolfoborges.utils.jwt.ClaimsBuilder;
 import br.com.rudolfoborges.utils.jwt.JWTBuilder;
 import br.com.rudolfoborges.utils.serializers.SuccessResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.Map;
 
 @RestController
 @Transactional
@@ -30,18 +30,15 @@ public class AuthControlle {
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
     private final SecretRepository secretRepository;
-	private final MessagesProperties messagesProperties;
 
     @Autowired
     public AuthControlle(UserRepository userRepository,
                          SessionRepository sessionRepository,
-                         SecretRepository secretRepository,
-                         MessagesProperties messagesProperties){
+                         SecretRepository secretRepository){
 
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
         this.secretRepository = secretRepository;
-		this.messagesProperties = messagesProperties;
     }
 
     @RequestMapping(path = "login", method = RequestMethod.POST)
@@ -49,7 +46,7 @@ public class AuthControlle {
         User user = userRepository.findOneByEmail(login.getEmail());
 
         if(!login.verify(new BCryptStrategy(), user)){
-            throw new EmailOrPasswordInvalidException(messagesProperties);
+            throw new EmailOrPasswordInvalidException();
         }
 
         Secret secret = secretRepository.findFirstByEnabled(true);
@@ -62,10 +59,21 @@ public class AuthControlle {
         return new SuccessResponse(user, session);
     }
 
-    @RequestMapping(path = "perfil/${id}", method = RequestMethod.GET)
-    public SuccessResponse perfil(){
+    @RequestMapping(path = "perfil/{id}", method = RequestMethod.GET)
+    public SuccessResponse perfil(@PathVariable("id") Long id, @RequestHeader("Authorization") String token){
+        User user = userRepository.findOne(id);
 
-        return null;
+        if(token == null || user == null){
+            throw new UnauthorizeException();
+        }
+
+        Session session = sessionRepository.findOneByToken(token);
+
+        if(session != null && !session.verify(user, token)){
+            throw new UnauthorizeException();
+        }
+
+        return new SuccessResponse(user, session);
     }
 
 }
