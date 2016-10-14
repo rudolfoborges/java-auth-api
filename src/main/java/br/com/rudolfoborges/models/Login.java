@@ -1,8 +1,7 @@
 package br.com.rudolfoborges.models;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import br.com.rudolfoborges.utils.encrypt.EncryptStrategy;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class Login {
 

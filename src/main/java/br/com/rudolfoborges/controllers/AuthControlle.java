@@ -10,6 +10,7 @@ import br.com.rudolfoborges.repositories.UserRepository;
 import br.com.rudolfoborges.utils.MessagesProperties;
 import br.com.rudolfoborges.utils.encrypt.BCryptStrategy;
 import br.com.rudolfoborges.utils.exceptions.EmailOrPasswordInvalidException;
+import br.com.rudolfoborges.utils.jwt.JWTBuilder;
 import br.com.rudolfoborges.utils.serializers.SuccessResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 @RestController
 @Transactional
 @RequestMapping("api/v1/auth")
-public class LoginControlle {
+public class AuthControlle {
 
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
@@ -31,10 +33,10 @@ public class LoginControlle {
 	private final MessagesProperties messagesProperties;
 
     @Autowired
-    public LoginControlle(UserRepository userRepository, 
-    		SessionRepository sessionRepository, 
-    		SecretRepository secretRepository,
-    		MessagesProperties messagesProperties){
+    public AuthControlle(UserRepository userRepository,
+                         SessionRepository sessionRepository,
+                         SecretRepository secretRepository,
+                         MessagesProperties messagesProperties){
 
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
@@ -52,11 +54,18 @@ public class LoginControlle {
 
         Secret secret = secretRepository.findFirstByEnabled(true);
 
-        Session session = new Session(user);
-        session.createJWTToken(secret.getValue());
+        Date loginDate = new Date();
+        String token = new JWTBuilder(secret.getValue()).build(user, loginDate);
+        Session session = new Session(user, loginDate, token);
         sessionRepository.save(session);
 
         return new SuccessResponse(user, session);
+    }
+
+    @RequestMapping(path = "perfil/${id}", method = RequestMethod.GET)
+    public SuccessResponse perfil(){
+
+        return null;
     }
 
 }

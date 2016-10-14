@@ -9,6 +9,7 @@ import br.com.rudolfoborges.repositories.UserRepository;
 import br.com.rudolfoborges.utils.MessagesProperties;
 import br.com.rudolfoborges.utils.encrypt.BCryptStrategy;
 import br.com.rudolfoborges.utils.exceptions.BusinessException;
+import br.com.rudolfoborges.utils.jwt.JWTBuilder;
 import br.com.rudolfoborges.utils.serializers.SuccessResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 @RestController
 @Transactional
@@ -53,9 +55,10 @@ public class SignInController {
         userRepository.save(user);
 
         Secret secret = secretRepository.findFirstByEnabled(true);
-        
-        Session session = new Session(user);
-        session.createJWTToken(secret.getValue());
+
+        Date loginDate = new Date();
+        String token = new JWTBuilder(secret.getValue()).build(user, loginDate);
+        Session session = new Session(user, loginDate, token);
         sessionRepository.save(session);
 
         return new SuccessResponse(user, session);

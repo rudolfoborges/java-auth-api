@@ -15,7 +15,6 @@
 package br.com.rudolfoborges.utils.encrypt;
 
 import java.io.UnsupportedEncodingException;
-
 import java.security.SecureRandom;
 
 /**

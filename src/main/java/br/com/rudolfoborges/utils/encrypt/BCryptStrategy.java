@@ -1,7 +1,5 @@
 package br.com.rudolfoborges.utils.encrypt;
 
-import java.util.Date;
-
 public class BCryptStrategy implements EncryptStrategy {
 
     public String encode(String value, String salt) {

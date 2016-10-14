@@ -1,8 +1,7 @@
 package br.com.rudolfoborges.utils.exceptions;
 
-import org.springframework.http.HttpStatus;
-
 import br.com.rudolfoborges.utils.MessagesProperties;
+import org.springframework.http.HttpStatus;
 
 public class EmailOrPasswordInvalidException extends ApplicationException {
 
