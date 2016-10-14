@@ -46,11 +46,11 @@ public class User {
         this.modified = new Date();
     }
 
-    public void defineCreatedDate(){
+    public void definedCreateDate(){
         this.created = new Date();
     }
 
-    public void encodePassword(EncryptStrategy encryptStrategy){
+    public void encodedPassword(EncryptStrategy encryptStrategy){
         salt = Salt.get();
         password = encryptStrategy.encode(password, salt);
     }

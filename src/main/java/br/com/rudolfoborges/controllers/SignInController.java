@@ -50,8 +50,8 @@ public class SignInController {
             throw new BusinessException(messagesProperties.getUserExists());
         }
 
-        user.defineCreatedDate();
-        user.encodePassword(new BCryptStrategy());
+        user.definedCreateDate();
+        user.encodedPassword(new BCryptStrategy());
         userRepository.save(user);
 
         Secret secret = secretRepository.findFirstByEnabled(true);
