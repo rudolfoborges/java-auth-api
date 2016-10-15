@@ -1,0 +1,28 @@
+{
+  "name": "java-auth-api",
+  "version": "1.0.0",
+  "description": "Projeto Java parte do processo seletivo da Concrete Solutions",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rudolfoborges/java-auth-api.git"
+  },
+  "author": "Rudolfo Borges",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rudolfoborges/java-auth-api/issues"
+  },
+  "homepage": "https://github.com/rudolfoborges/java-auth-api#readme",
+  "devDependencies": {
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-jshint": "^2.0.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^2.0.0"
+  }
+}
