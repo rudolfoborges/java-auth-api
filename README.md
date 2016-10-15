@@ -1,7 +1,7 @@
-# java-auth-api
+# **java-auth-api**
 Projeto Java parte do processo seletivo da Concrete Solutions
 
-### Java, Frameworks and Libs
+## **Java, Frameworks and Libs**
 * Java 8
 * Spring Boot
 * Gradle
@@ -10,13 +10,13 @@ Projeto Java parte do processo seletivo da Concrete Solutions
 * Mockito
 * Travis CI on GITHUB
 
-### Endpoints
+## **Endpoints**
 
 * http://localhost:8080/api/v1/signup - POST
 * http://localhost:8080/api/v1/auth/login - POST
 * http://localhost:8080/api/v1/auth/perfil/{id} - GET
 
-### Run with Docker (Commands)
+## **Run with Docker (Commands)**
 
 ./gradlew build
 
@@ -24,7 +24,7 @@ docker-compose build
 
 docker-compose up -d
 
-### Demo (Heroku)
+## **Demo (Heroku)**
 
 * http://concrete.rudolfoborges.com.br/api/v1/signin - POST
 * http://concrete.rudolfoborges.com.br/api/v1/auth/login - POST
@@ -35,3 +35,11 @@ OR
 * http://sheltered-mesa-83429.herokuapp.com/api/v1/signin - POST
 * http://sheltered-mesa-83429.herokuapp.com/api/v1/auth/login - POST
 * http://sheltered-mesa-83429.herokuapp.com/api/v1/auth/perfil/{id} - GET
+
+## **Extra**
+
+### User Endpoint
+
+* http://localhost:8080/api/v1/user - GET
+* http://concrete.rudolfoborges.com.br/api/v1/user - GET (Demo)
+* http://sheltered-mesa-83429.herokuapp.com/api/v1/user - GET (Demo)
