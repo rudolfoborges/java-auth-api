@@ -19,7 +19,7 @@ Projeto Java parte do processo seletivo da Concrete Solutions
 > * Gulp
 
 ## **Front Angular**
-* htttp://localhost:8080
+* http://localhost:8080
 * http://concrete.rudolfoborges.com.br/
 * http://sheltered-mesa-83429.herokuapp.com
 
