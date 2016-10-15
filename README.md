@@ -18,6 +18,11 @@ Projeto Java parte do processo seletivo da Concrete Solutions
 > * Sass
 > * Gulp
 
+## **Front Angular**
+* htttp://localhost:8080
+* http://concrete.rudolfoborges.com.br/
+* http://sheltered-mesa-83429.herokuapp.com
+
 ## **Endpoints**
 
 * http://localhost:8080/api/v1/signup - POST
@@ -51,3 +56,11 @@ OR
 * http://localhost:8080/api/v1/user - GET
 * http://concrete.rudolfoborges.com.br/api/v1/user - GET (Demo)
 * http://sheltered-mesa-83429.herokuapp.com/api/v1/user - GET (Demo)
+
+## **Gulp**
+
+* angular-src/*.js -> angular.app.js (cat) 
+* angular-src/views/*.html -> angular.views.js (cat, min)
+* assets/css/*.scss -> style.css (cat, min)
+* images-src/* -> static/assets/images
+* angular-src/index.html -> static/assets/index.html (min)
