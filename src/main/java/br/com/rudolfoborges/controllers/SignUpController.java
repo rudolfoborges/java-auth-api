@@ -23,8 +23,8 @@ import java.util.Date;
 
 @RestController
 @Transactional
-@RequestMapping("api/v1/signin")
-public class SignInController {
+@RequestMapping("api/v1/signup")
+public class SignUpController {
 
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
@@ -33,10 +33,10 @@ public class SignInController {
 	
 
     @Autowired
-    public SignInController(UserRepository userRepository, 
-    		SessionRepository sessionRepository, 
-    		SecretRepository secretRepository,
-    		MessagesProperties messagesProperties){
+    public SignUpController(UserRepository userRepository,
+                            SessionRepository sessionRepository,
+                            SecretRepository secretRepository,
+                            MessagesProperties messagesProperties){
 
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;

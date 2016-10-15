@@ -11,7 +11,7 @@ Projeto Java parte do processo seletivo da Concrete Solutions
 
 ### Endpoints
 
-* http://localhost:8080/api/v1/signin - POST
+* http://localhost:8080/api/v1/signup - POST
 * http://localhost:8080/api/v1/auth/login - POST
 * http://localhost:8080/api/v1/auth/perfil/{id} - GET
 

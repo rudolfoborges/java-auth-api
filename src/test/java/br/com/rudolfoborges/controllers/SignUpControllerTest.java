@@ -17,14 +17,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SignInControllerTest {
+public class SignUpControllerTest {
 
     private UserRepository userRepository;
     private SessionRepository sessionRepository;
     private SecretRepository secretRepository;
     private MessagesProperties messagesProperties;
 
-    private SignInController signInController;
+    private SignUpController signUpController;
 
     @Before
     public void before(){
@@ -36,20 +36,20 @@ public class SignInControllerTest {
         Secret secret = new Secret("secret");
         when(secretRepository.findFirstByEnabled(true)).thenReturn(secret);
 
-        signInController = new SignInController(userRepository, sessionRepository, secretRepository, messagesProperties);
+        signUpController = new SignUpController(userRepository, sessionRepository, secretRepository, messagesProperties);
     }
 
     @Test
     public void signinTest(){
     	User user = new User();
-        signInController.signIn(user);
+        signUpController.signIn(user);
     }
 
     @Test(expected = BusinessException.class)
     public void signinUniqueEmailTest(){
     	User user = new User();
         when(userRepository.countByEmail(anyString())).thenReturn(1L);
-        signInController.signIn(user);
+        signUpController.signIn(user);
     }
 
 }
