@@ -12,6 +12,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@NamedEntityGraphs(value = {
+    @NamedEntityGraph(name = "phones", attributeNodes = {@NamedAttributeNode("phones")}),
+    @NamedEntityGraph(name = "sessions", attributeNodes = {@NamedAttributeNode("sessions")})
+})
 public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +44,7 @@ public class User {
     private List<Phone> phones;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Session> session;
+    private List<Session> sessions;
 
     public User(){
         this.modified = new Date();
@@ -121,11 +125,11 @@ public class User {
         this.modified = modified;
     }
 
-    public List<Session> getSession() {
-        return session;
+    public List<Session> getSessions() {
+        return sessions;
     }
 
-    public void setSession(List<Session> session) {
-        this.session = session;
+    public void setSessions(List<Session> sessions) {
+        this.sessions = sessions;
     }
 }

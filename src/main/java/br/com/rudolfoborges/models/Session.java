@@ -15,7 +15,7 @@ import java.util.Map;
 @Table(name = "sessions")
 public class Session {
 
-    private static final long SESSION_TIME = 30 * 60;
+    private static final long SESSION_TIMEOUT = 30 * 60;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,7 +46,7 @@ public class Session {
         Instant now = Instant.now();
         Instant lastLoginInstant = Instant.ofEpochMilli(lastLogin.getTime());
         Duration duration = Duration.between(lastLoginInstant, now);
-        return duration.getSeconds() <= SESSION_TIME;
+        return duration.getSeconds() <= SESSION_TIMEOUT;
     }
 
     public Long getId() {

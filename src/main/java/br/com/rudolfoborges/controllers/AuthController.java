@@ -23,16 +23,16 @@ import java.util.Date;
 @RestController
 @Transactional
 @RequestMapping("api/v1/auth")
-public class AuthControlle {
+public class AuthController {
 
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
     private final SecretRepository secretRepository;
 
     @Autowired
-    public AuthControlle(UserRepository userRepository,
-                         SessionRepository sessionRepository,
-                         SecretRepository secretRepository){
+    public AuthController(UserRepository userRepository,
+                          SessionRepository sessionRepository,
+                          SecretRepository secretRepository){
 
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
