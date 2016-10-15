@@ -1,1 +1,10 @@
-<h1>Users</h1>
+<div class="users cards">
+    <div class="card animated fadeIn col-md-5 col-sm-12" ng-repeat="user in ctrl.users">
+        <img src="http://media.npr.org/assets/news/2009/10/27/facebook1_sq-17f6f5e06d5742d8c53576f7c13d5cf7158202a9.jpg?s=16" alt="" />
+        <h1>{{user.name}}</h1>
+        <p>
+            <span><i class="fa fa-envelope-o" aria-hidden="true"></i> {{user.email}}</span>
+            <span><i class="fa fa-calendar" aria-hidden="true"></i></i> {{user.created | date:'dd/MM/yyyy'}}</span>
+        </p>
+    </div>
+</div>

@@ -11,25 +11,27 @@
     function config($locationProvider, $stateProvider, $urlRouterProvider, $httpProvider){
         $locationProvider.html5Mode(false).hashPrefix('!');
 
+        var userState = {
+                            url: '/users',
+                            cache: false,
+                            templateUrl: 'users.html',
+                            controller: 'UserController as ctrl',
+                            resolve: {
+                                Users: function($http, $rootScope){
+                                    return $http.get('api/v1/user');
+                                }
+                            }
+                        };
+
+         var rbState = {
+                           url: '/rudolfoborges',
+                           cache: true,
+                           templateUrl: 'rudolfoborges.html'
+                       };
+
         $stateProvider
-            .state('users', {
-                url: '/users',
-                cache: false,
-                templateUrl: 'users.html',
-                controller: 'UserController as ctrl',
-                resolve: {
-                    Users: function($http, $rootScope){
-                        return $http.get($rootScope.apiURL('api/v1/user'));
-                    }
-                }
-            })
-
-            .state('rudolfoborges', {
-                url: '/rudolfoborges',
-                cache: true,
-                templateUrl: 'rudolfoborges.html'
-            });
-
+            .state('users', userState)
+            .state('rudolfoborges', rbState);
 
         $urlRouterProvider.otherwise('/users');
     }

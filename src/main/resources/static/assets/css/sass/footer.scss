@@ -1,8 +1,17 @@
 .footer {
   width: 100%;
-  border-top: 1px solid $text-primary-color;
   min-height: 150px;
   text-align: center;
+
+  position:fixed;
+  left: 0px;
+  bottom: 0px;
+  background: #fff;
+
+    .container {
+        border-top: 1px solid $text-primary-color;
+        margin: 0 auto;
+    }
 
     p {
       margin: 0;

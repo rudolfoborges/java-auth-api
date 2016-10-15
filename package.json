@@ -18,12 +18,14 @@
   "homepage": "https://github.com/rudolfoborges/java-auth-api#readme",
   "devDependencies": {
     "gulp-angular-templatecache": "^2.0.0",
+    "gulp-clean-css": "^2.0.13",
     "gulp-concat": "^2.6.0",
     "gulp-htmlmin": "^3.0.0",
     "gulp-imagemin": "^3.0.3",
     "gulp-jshint": "^2.0.1",
     "gulp-sass": "^2.3.2",
-    "gulp-uglify": "^2.0.0"
+    "gulp-uglify": "^2.0.0",
+    "gulp-useref": "^3.1.2"
   },
   "dependencies": {
     "gulp": "^3.9.1"
