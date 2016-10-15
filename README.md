@@ -3,20 +3,20 @@ Projeto Java parte do processo seletivo da Concrete Solutions
 
 ## **Java, Frameworks and Libs**
 * Banck
-> Java 8
-> Spring Boot
-> Gradle
-> JWT
-> BCrypt
-> Mockito
+> * Java 8
+> * Spring Boot
+> * Gradle
+> * JWT
+> * BCrypt
+> * Mockito
 
 * CI
-> Travis CI on GITHUB
+> * Travis CI on GITHUB
 
 * Front
-> Angular
-> Sass
-> Gulp
+> * Angular
+> * Sass
+> * Gulp
 
 ## **Endpoints**
 
