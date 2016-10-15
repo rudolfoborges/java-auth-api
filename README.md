@@ -2,7 +2,7 @@
 Projeto Java parte do processo seletivo da Concrete Solutions
 
 ## **Java, Frameworks and Libs**
-* Banck
+* Back
 > * Java 8
 > * Spring Boot
 > * Gradle
