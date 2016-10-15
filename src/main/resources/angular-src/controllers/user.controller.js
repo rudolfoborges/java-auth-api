@@ -3,9 +3,9 @@
 
     angular
         .module('angular.app.controllers')
-        .controller('UserController', ['$scope', UserController]);
+        .controller('UserController', ['Users', UserController]);
 
-    function UserController($scope){
+    function UserController(Users){
         var ctrl = this;
         ctrl.users = [];
 

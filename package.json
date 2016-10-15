@@ -24,5 +24,8 @@
     "gulp-jshint": "^2.0.1",
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.0.0"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1"
   }
 }

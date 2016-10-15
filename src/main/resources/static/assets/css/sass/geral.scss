@@ -1,0 +1,39 @@
+$bg-primary-color: #fff;
+$text-primary-color: #34495e;
+$font-size-lg: 26px;
+$font-size-md: 22px;
+$font-size-sm: 18px;
+$font-size-xs: 14px;
+
+body {
+    font-family: 'Open Sans',sans-serif;
+    font-size: $font-size-xs;
+    background-color: $bg-primary-color;
+    color: $text-primary-color;
+    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+.container {
+  max-width: 970px;
+}
+
+h1 {
+  font-size: $font-size-lg;
+}
+
+h2 {
+  font-size: $font-size-md;
+}
+
+h3 {
+  font-size: $font-size-sm;
+}
+
+h4 {
+  font-size: $font-size-xs;
+}
+
+.view {
+  margin: 30px 15px;
+  width: 100%;
+}

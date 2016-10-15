@@ -1,0 +1,2 @@
+angular.module('angular.app.views', []).run(['$templateCache', function($templateCache) {$templateCache.put('rudolfoborges.html','<div class="sobre-min"><img src="assets/images/rudolfoborges-real.png"><h1>Rudolfo Borges</h1><p>Um programador apaixonado, possui 8+ anos de experi\xEAncia em TI e ama compartilhar conhecimento. Bacharel em Ci\xEAncia da Computa\xE7\xE3o \xE9 entusiasta Java, JavaScript, NodeJS, Angular, Ruby e Mobile.</p></div>');
+$templateCache.put('users.html','<h1>Users</h1>');}]);
