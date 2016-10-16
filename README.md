@@ -11,7 +11,7 @@ Projeto Java parte do processo seletivo da Concrete Solutions
 > * Mockito
 
 * CI
-> * Travis CI on GITHUB
+> * Travis CI on GITHUB (Automatic Deploy in Heroku Provider)
 
 * Front
 > * Angular
