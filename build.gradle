@@ -37,6 +37,8 @@ dependencies {
 
 	compile('org.springframework.boot:spring-boot-starter-jetty')
 
+	compile('org.springframework.boot:spring-boot-starter-websocket')
+
 	runtime('org.hsqldb:hsqldb')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
