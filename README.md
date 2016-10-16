@@ -17,6 +17,11 @@ Projeto Java parte do processo seletivo da Concrete Solutions
 > * Angular
 > * Sass
 > * Gulp
+> * Bower
+
+* WebSocket (Load new users in index page)
+> * SocketJS
+> * Stomp
 
 ## **Front Angular**
 * http://localhost:8080

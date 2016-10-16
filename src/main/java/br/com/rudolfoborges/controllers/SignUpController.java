@@ -10,7 +10,10 @@ import br.com.rudolfoborges.utils.MessagesProperties;
 import br.com.rudolfoborges.utils.encrypt.BCryptStrategy;
 import br.com.rudolfoborges.utils.exceptions.BusinessException;
 import br.com.rudolfoborges.utils.jwt.JWTBuilder;
+import br.com.rudolfoborges.utils.notifications.NotificatioAgent;
+import br.com.rudolfoborges.utils.notifications.TopicUsersWSPipe;
 import br.com.rudolfoborges.utils.serializers.SuccessResponse;
+import br.com.rudolfoborges.utils.serializers.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,18 +33,20 @@ public class SignUpController {
     private final SessionRepository sessionRepository;
     private final SecretRepository secretRepository;
 	private final MessagesProperties messagesProperties;
-	
+    private final TopicUsersWSPipe topicUsersWSPipe;
 
     @Autowired
     public SignUpController(UserRepository userRepository,
                             SessionRepository sessionRepository,
                             SecretRepository secretRepository,
-                            MessagesProperties messagesProperties){
+                            MessagesProperties messagesProperties,
+                            TopicUsersWSPipe topicUsersWSPipe){
 
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
         this.secretRepository = secretRepository;
 		this.messagesProperties = messagesProperties;
+        this.topicUsersWSPipe = topicUsersWSPipe;
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -60,6 +65,12 @@ public class SignUpController {
         String token = new JWTBuilder(secret.getValue()).build(user, loginDate);
         Session session = new Session(user, loginDate, token);
         sessionRepository.save(session);
+
+        //Send message to pipe. Ex.: WebSocket and Push Notification
+        new NotificatioAgent()
+                .pipe(topicUsersWSPipe)
+                .message(new UserMessage(user))
+                .send();
 
         return new SuccessResponse(user, session);
     }

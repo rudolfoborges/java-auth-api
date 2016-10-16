@@ -14,5 +14,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "stomp-websocket": "^2.3.4",
+    "sockjs-client": "^1.1.1"
+  }
 }

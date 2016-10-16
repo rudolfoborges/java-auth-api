@@ -7,6 +7,7 @@ import br.com.rudolfoborges.repositories.SessionRepository;
 import br.com.rudolfoborges.repositories.UserRepository;
 import br.com.rudolfoborges.utils.MessagesProperties;
 import br.com.rudolfoborges.utils.exceptions.BusinessException;
+import br.com.rudolfoborges.utils.notifications.TopicUsersWSPipe;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ public class SignUpControllerTest {
     private SessionRepository sessionRepository;
     private SecretRepository secretRepository;
     private MessagesProperties messagesProperties;
+    private TopicUsersWSPipe topicUsersWSPipe;
 
     private SignUpController signUpController;
 
@@ -32,11 +34,12 @@ public class SignUpControllerTest {
         sessionRepository = mock(SessionRepository.class);
         secretRepository = mock(SecretRepository.class);
         messagesProperties = mock(MessagesProperties.class);
-        
+        topicUsersWSPipe = mock(TopicUsersWSPipe.class);
+
         Secret secret = new Secret("secret");
         when(secretRepository.findFirstByEnabled(true)).thenReturn(secret);
 
-        signUpController = new SignUpController(userRepository, sessionRepository, secretRepository, messagesProperties);
+        signUpController = new SignUpController(userRepository, sessionRepository, secretRepository, messagesProperties, topicUsersWSPipe);
     }
 
     @Test

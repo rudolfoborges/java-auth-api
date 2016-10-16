@@ -2,6 +2,8 @@ package br.com.rudolfoborges.models;
 
 import br.com.rudolfoborges.utils.encrypt.EncryptStrategy;
 import br.com.rudolfoborges.utils.encrypt.Salt;
+import br.com.rudolfoborges.utils.notifications.Message;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 

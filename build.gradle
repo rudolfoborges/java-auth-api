@@ -31,11 +31,13 @@ dependencies {
 
 	compile('com.auth0:java-jwt:2.+')
 
-	compile('org.springframework.boot:spring-boot-starter-web') {
-		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-	}
+	compile('org.springframework.boot:spring-boot-starter-web')
 
-	compile('org.springframework.boot:spring-boot-starter-jetty')
+	/*compile('org.springframework.boot:spring-boot-starter-web') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+	}*/
+
+	//compile('org.springframework.boot:spring-boot-starter-jetty')
 
 	compile('org.springframework.boot:spring-boot-starter-websocket')
 

@@ -40,7 +40,7 @@ gulp.task('images', function() {
 });
 
 gulp.task('htmlmin', function() {
-  return gulp.src('src/main/resources/static/*.html')
+  return gulp.src('src/main/resources/angular-src/*.html')
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('src/main/resources/static'));
 });
