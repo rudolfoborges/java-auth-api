@@ -1,4 +1,11 @@
 language: java
-
 jdk:
-  - oraclejdk8
+- oraclejdk8
+deploy:
+  provider: heroku
+  on: master
+  api_key:
+    secure: lGLZTjFLM6kgd1aK8Df5ZWWEB/JzoQmPSxOYHUM/7nP8WZyxA2qDY+JtN7cScoSmA2+ux2otndD4GpkBPGg6FQ8ozjeq6LuJt8/qdCn4QI+qEpawwKs6SUOyLOdsJyJYlFoIhJ0bOqAv7DycRtjfyw7aUTn8ojuJoznXI1IHlpYWZHb3df+2bOhE6MTcLTPlOp0ixEbbbB4oeGLUWZEXbvpFH5PI1QfyCxwOWa/L23k1gr1fACZ7zlO70Rqi6GX33PW0NvgiUPBeMQkrgTvr8r7h0Axs9Tag7G3KzdPQhVx99IlkwW8fw/7Hwb0fLBz6pf3Rs8F+UKbZ/fgvC+TOp6dCW7wcrU6aUf8FsI5tZXgweY6kthe31Q5ZpklA5pOYdnPrWDuJy3uf814pz/z1fYs+ohi2kIz4heQ/58ws3QyGMkvn5Zxea+5QZITxe6rGh4WQu9fedu9Yo+0tB0MAhwq2a0Go84MgzpVtTBTNM3CwuuIq0YIJSD9Js3Koa8dD2NsiBO4GQn2y2LU7yxfpGnJW7bdaPWBaTibXaobw1QzEiFKeUqr62jPvdi3ZRHUeMCbTLtnp6yfmDhzcE2Y2sWKgMqlcnUtxG4APKdO9R41opb6ITBMP01hU6UKTy/dUKCkzvxCT5s9DhLBr35kih86YchRxd78EDmxMWzJELRk=
+  app:
+    master: sheltered-mesa-83429
+
